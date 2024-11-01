@@ -1,34 +1,48 @@
 package edu.badpals;
 
-import java.sql.*;
-
 public class Main {
 
     public static void main(String[] args) {
-        try {
 
-            // Establish the connection
-            String url = "jdbc:mysql://localhost:3306/mundo";
-            Connection conexion = DriverManager.getConnection( url,"root", "root");
+        String separador = "---------------------------------";
 
-            // Create a statement
-            Statement s = conexion.createStatement();
+        prueba1();
+        System.out.println(separador);
+        prueba2();
+        System.out.println(separador);
+        prueba3();
+        System.out.println(separador);
+        prueba4();
 
-            // Execute the query
-            ResultSet rs = s.executeQuery("SELECT * FROM paises"); // Corrected table name
+    }
 
-            // Process the result set
-            while (rs.next()) {
-                System.out.println("nombre_pais: " + rs.getString("nombre_pais") + ", habitantes: " +
-                        rs.getString("habitantes") + " " + rs.getString("capital"));
-            }
+    public static void prueba1() {
+        System.out.println("prueba1");
+        Conexion c = new Conexion();
+        c.conectarseBBDD();
+    }
 
-            // Close the resources
-            rs.close();
-            s.close();
-            conexion.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void prueba2() {
+        System.out.println("prueba2");
+        Conexion c = new Conexion();
+        c.addDatos("España2", "47000000", "Madrid", "Euro");
+        c.leerDatos();
+    }
+
+    public static void prueba3() {
+        System.out.println("prueba3");
+        Conexion c = new Conexion();
+        c.addDatos("España2", "47000000", "Madrid", "Euro");
+        c.modifyDatos("España2", "0", "madriles", "cubata");
+        c.leerDatos();
+    }
+
+    public static void prueba4() {
+        System.out.println("prueba4");
+        Conexion c = new Conexion();
+        c.addDatos("España2", "47000000", "Madrid", "Euro");
+        c.leerDatos();
+        c.deleteDatos("España2");
+        c.leerDatos();
     }
 }
